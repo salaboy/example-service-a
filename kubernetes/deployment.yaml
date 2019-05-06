@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-a
+  labels:
+    app: service-a
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-a
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: service-a
+    spec:
+      containers:
+      - name: service-a
+        image: salaboy/service-a
+        ports:
+        - containerPort: 8080
+      serviceAccountName: service-a     

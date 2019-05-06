@@ -1,0 +1,25 @@
+spring:
+  application.name: servicea
+  cloud:
+    kubernetes:
+      reload:
+        enabled: true
+        mode: polling
+
+server.port: 8080
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.cloud.loadbalancer: TRACE
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      enabled: true
+    restart:
+      enabled: true
+    info:
+      enabled: true
