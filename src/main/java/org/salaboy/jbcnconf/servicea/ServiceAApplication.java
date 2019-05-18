@@ -33,8 +33,8 @@ public class ServiceAApplication implements CommandLineRunner {
 
     @Scheduled(fixedDelay = 5000)
     public void callFunction() {
-        System.out.println(" --------------------------> Calling Function ");
-        WebClient webClient = WebClient.builder().baseUrl("http://" + "example-function-a" + ".knativetutorial.svc.cluster.local").build();
+        System.out.println(" --------------------------> Calling Function example-function-a.default.svc.cluster.local");
+        WebClient webClient = WebClient.builder().baseUrl("http://" + "example-function-a.default.svc.cluster.local").build();
         webClient.get().uri("/").retrieve()
                 .bodyToMono(String.class)
                 .doOnError(e -> System.out.println(">> Example Function A is not available, return a default answer"))
@@ -44,7 +44,7 @@ public class ServiceAApplication implements CommandLineRunner {
 
     @Scheduled(fixedDelay = 5000)
     public void callServiceB() {
-        System.out.println(" --------------------------> Calling service ");
+        System.out.println(" --------------------------> Calling service-b ");
         WebClient webClient = WebClient.builder().baseUrl("http://" + "service-b").build();
         webClient.get().uri("/").retrieve()
                 .bodyToMono(String.class)
