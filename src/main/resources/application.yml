@@ -1,11 +1,11 @@
 spring:
-  application.name: servicea
+  application.name: my-service-a
   cloud:
     kubernetes:
       reload:
         enabled: true
         mode: polling
-
+my.application.name: "my-app"
 server.port: 8080
 logging:
   level:
