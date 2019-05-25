@@ -57,19 +57,19 @@ public class ServiceAApplication implements CommandLineRunner {
     @Scheduled(fixedDelay = 10000)
     public void callFunction() {
         if (on) {
-            logger.info(" --- Function example-function-a --- ");
-            logger.info("\t >> Calling Downstream Function example-function-a.default.svc.cluster.local");
+            logger.info(" --- Function A --- ");
+            logger.info("\t >> Calling Downstream Function A");
             WebClient webClient = WebClient.builder().baseUrl("http://" + "example-function-a.default.svc.cluster.local").build();
             webClient.get().uri("/").retrieve()
                     .bodyToMono(String.class)
                     .doOnError(e -> {
-                        logger.info("\t >> Example Function A is NOT AVAILABLE.");
-                        logger.info(" --- End Error Function example-function-a --- \n ");
+                        logger.info("\t >> Function A is NOT AVAILABLE.");
+                        logger.info(" --- End Error Function A --- \n ");
                     })
                     .subscribe(r -> {
-                        logger.info("\t >> Example Function A output: ");
+                        logger.info("\t >> Function A Output: ");
                         logger.info("\t " + r);
-                        logger.info(" --- End OK Function example-function-a --- \n");
+                        logger.info(" --- End OK Function A --- \n");
                     });
         }
     }
@@ -88,7 +88,7 @@ public class ServiceAApplication implements CommandLineRunner {
                         logger.info(" --- End Error Service B --- \n ");
                     })
                     .subscribe(r -> {
-                        logger.info("\t >> Service B output: ");
+                        logger.info("\t >> Service B Output: ");
                         logger.info("\t " + r);
                         logger.info(" --- End OK Service B --- \n");
                     });
