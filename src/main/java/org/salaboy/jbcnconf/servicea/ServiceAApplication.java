@@ -21,7 +21,7 @@ public class ServiceAApplication implements CommandLineRunner {
     private Logger logger = LoggerFactory.getLogger(ServiceAApplication.class);
 
     // Is the service On?
-    private boolean on = true;
+    private boolean on = false;
 
     @Value("${my.application.name}:default-app")
     private String applicationName;
@@ -34,7 +34,9 @@ public class ServiceAApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         logger.info(" --------- STARTED ---------- ");
-        logger.info("> Service A is now: " + ((on) ? "ON" : "OFF"));
+        this.on = true;
+        logger.info("> Service A is now: " + ((on) ? "ON" : "OFF") + "\n\n");
+
     }
 
     @GetMapping
@@ -45,7 +47,7 @@ public class ServiceAApplication implements CommandLineRunner {
     @PostMapping
     public void turnOnOff() {
         on = !on;
-        logger.info("Service A is now: " + ((on) ? "ON" : "OFF"));
+        logger.info("Service A is now: " + ((on) ? "ON" : "OFF") + "\n\n");
     }
 
     @GetMapping("/status")
@@ -64,12 +66,12 @@ public class ServiceAApplication implements CommandLineRunner {
                     .bodyToMono(String.class)
                     .doOnError(e -> {
                         logger.info("\t >> Function A is NOT AVAILABLE.");
-                        logger.info(" --- End Error Function A --- \n ");
+                        logger.info(" --- End Error Function A --- \n\n ");
                     })
                     .subscribe(r -> {
                         logger.info("\t >> Function A Output: ");
                         logger.info("\t " + r);
-                        logger.info(" --- End OK Function A --- \n");
+                        logger.info(" --- End OK Function A --- \n\n");
                     });
         }
     }
@@ -85,12 +87,12 @@ public class ServiceAApplication implements CommandLineRunner {
                     .bodyToMono(String.class)
                     .doOnError(e -> {
                         logger.info("\t >> Service B is NOT AVAILABLE.");
-                        logger.info(" --- End Error Service B --- \n ");
+                        logger.info(" --- End Error Service B --- \n\n ");
                     })
                     .subscribe(r -> {
                         logger.info("\t >> Service B Output: ");
                         logger.info("\t " + r);
-                        logger.info(" --- End OK Service B --- \n");
+                        logger.info(" --- End OK Service B --- \n\n");
                     });
         }
     }
