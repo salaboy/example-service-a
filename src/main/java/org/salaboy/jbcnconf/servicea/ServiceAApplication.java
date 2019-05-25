@@ -21,7 +21,7 @@ public class ServiceAApplication implements CommandLineRunner {
     private Logger logger = LoggerFactory.getLogger(ServiceAApplication.class);
 
     // Is the service On?
-    private boolean on = false;
+    private boolean on = true;
 
     @Value("${my.application.name}:default-app")
     private String applicationName;
@@ -74,13 +74,13 @@ public class ServiceAApplication implements CommandLineRunner {
         }
     }
 
-    //@TODO: service-b call per application
+    //@TODO: my-service-b call per application
     @Scheduled(fixedDelay = 10000, initialDelay = 5000)
     public void callServiceB() {
         if (on) {
             logger.info(" --- Service B --- ");
-            logger.info("\t >> Calling Downstream Service service-b");
-            WebClient webClient = WebClient.builder().baseUrl("http://" + "service-b").build();
+            logger.info("\t >> Calling Downstream Service my-service-b");
+            WebClient webClient = WebClient.builder().baseUrl("http://" + "my-service-b").build();
             webClient.get().uri("/").retrieve()
                     .bodyToMono(String.class)
                     .doOnError(e -> {
