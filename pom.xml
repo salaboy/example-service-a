@@ -40,6 +40,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.ap4k</groupId>
+            <artifactId>kubernetes-spring-starter</artifactId>
+            <version>0.4.0</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
